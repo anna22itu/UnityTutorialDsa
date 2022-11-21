@@ -5,6 +5,8 @@ using System.Collections;
 using System.Collections.Generic;        //Allows us to use Lists. 
 using UnityEngine;
 using Completed;
+//    using UnityEngine.UI;                    //Allows us to use UI.
+
 
 
 public class GameManager : MonoBehaviour
@@ -13,13 +15,21 @@ public class GameManager : MonoBehaviour
     public float turnDelay = 0.1f;
     public static GameManager instance = null;                //Static instance of GameManager which allows it to be accessed by any other script.
     public BoardManager boardScript;                        //Store a reference to our BoardManager which will set up the level.
-    private int level = 3;                                    //Current level number, expressed in game as "Day 1".
+    private int level = 1;                                    //Current level number, expressed in game as "Day 1".
 
     public int playerFoodPoints = 100;
     [HideInInspector] public bool playersTurn = true;
 
     private List<Enemy> enemies;
     private bool enemiesMoving;
+
+
+    //private Text levelText;  
+    //private GameObject levelImage;
+    //private bool doingSetup = true; 
+
+
+
 
     //Awake is always called before any Start functions
     void Awake()
@@ -62,6 +72,26 @@ public class GameManager : MonoBehaviour
     //Initializes the game for each level.
     void InitGame()
     {
+        Debug.Log("InitGame");
+
+        //While doingSetup is true the player can't move, prevent player from moving while title card is up.
+        //doingSetup = true;
+
+        //Get a reference to our image LevelImage by finding it by name.
+        //levelImage = GameObject.Find("LevelImage");
+
+        //Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
+        //levelText = GameObject.Find("LevelText").GetComponent<Text>();
+
+        //Set the text of levelText to the string "Day" and append the current level number.
+        //levelText.text = "Day " + level;
+
+        //Set levelImage to active blocking player's view of the game board during setup.
+        //levelImage.SetActive(true);
+
+        //Call the HideLevelImage function with a delay in seconds of levelStartDelay.
+        //Invoke("HideLevelImage", levelStartDelay);
+
         //Clear any Enemy objects in our List to prepare for next level.
         enemies.Clear();
 
@@ -72,6 +102,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        //Set levelText to display number of levels passed and game over message
+        //levelText.text = "After " + level + " days, you starved.";
+
         //Enable black background image gameObject.
         //levelImage.SetActive(true);
 
@@ -137,4 +170,16 @@ public class GameManager : MonoBehaviour
         //Enemies are done moving, set enemiesMoving to false.
         enemiesMoving = false;
     }
+
+    /**
+     //Hides black image used between levels
+        void HideLevelImage()
+        {
+            //Disable the levelImage gameObject.
+            levelImage.SetActive(false);
+
+            //Set doingSetup to false allowing player to move again.
+            doingSetup = false;
+        }
+     */
 }
