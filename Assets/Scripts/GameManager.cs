@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public float turnDelay = 0.1f;
     public static GameManager instance = null;                //Static instance of GameManager which allows it to be accessed by any other script.
     public BoardManager boardScript;                        //Store a reference to our BoardManager which will set up the level.
-    private int level = 5;                                    //Current level number, expressed in game as "Day 1".
+    private int level = 1;                                    //Current level number, expressed in game as "Day 1".
 
     public int playerFoodPoints = 100;
     [HideInInspector] public bool playersTurn = true;

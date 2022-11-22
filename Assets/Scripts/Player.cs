@@ -18,6 +18,13 @@ public class Player : MovingObject
     private Animator animator;                    //Used to store a reference to the Player's animator component.
     private int food;                            //Used to store player food points total during level.
 
+    public AudioClip moveSound1;
+    public AudioClip moveSound2;
+    public AudioClip eatSound1;
+    public AudioClip eatSound2;
+    public AudioClip drinkSound1;
+    public AudioClip drinkSound2;
+    public AudioClip mgameOverSound;
 
     //Start overrides the Start function of MovingObject
     protected override void Start()
@@ -91,6 +98,7 @@ public class Player : MovingObject
         if (Move(xDir, yDir, out hit))
         {
             //Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
+            SoundManager.instance.RandomizeSfx(moveSound1, moveSound2);
         }
 
         //Since the player has moved and lost food points, check if the game has ended.
@@ -136,6 +144,7 @@ public class Player : MovingObject
             food += pointsPerFood;
 
             foodText.text = "+" + pointsPerFood + " Food: " + food;
+            SoundManager.instance.RandomizeSfx(eatSound1, eatSound2);
 
             //Disable the food object the player collided with.
             other.gameObject.SetActive(false);
@@ -148,6 +157,7 @@ public class Player : MovingObject
             food += pointsPerSoda;
 
             foodText.text = "+" + pointsPerSoda + " Food: " + food;
+            SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
 
             //Disable the soda object the player collided with.
             other.gameObject.SetActive(false);
@@ -187,6 +197,8 @@ public class Player : MovingObject
         //Check if food point total is less than or equal to zero.
         if (food <= 0)
         {
+            SoundManager.instance.PlaySingle(mgameOverSound);
+            SoundManager.instance.musicSource.Stop();
 
             //Call the GameOver function of GameManager.
             GameManager.instance.GameOver();
