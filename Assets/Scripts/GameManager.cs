@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;        //Allows us to use Lists. 
 using UnityEngine;
 using Completed;
-//    using UnityEngine.UI;                    //Allows us to use UI.
+using UnityEngine.UI;                    //Allows us to use UI.
 
 
 
@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
     private bool enemiesMoving;
 
 
-    //private Text levelText;  
-    //private GameObject levelImage;
-    //private bool doingSetup = true; 
+    private Text levelText;  // current level in our text
+    private GameObject levelImage;
+    private bool doingSetup; 
 
 
 
@@ -73,22 +73,22 @@ public class GameManager : MonoBehaviour
     void InitGame()
     {
         //While doingSetup is true the player can't move, prevent player from moving while title card is up.
-        //doingSetup = true;
+        doingSetup = true;
 
         //Get a reference to our image LevelImage by finding it by name.
-        //levelImage = GameObject.Find("LevelImage");
+        levelImage = GameObject.Find("LevelImage");
 
         //Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
-        //levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        levelText = GameObject.Find("LevelText").GetComponent<Text>();
 
         //Set the text of levelText to the string "Day" and append the current level number.
-        //levelText.text = "Day " + level;
+        levelText.text = "Day " + level;
 
         //Set levelImage to active blocking player's view of the game board during setup.
-        //levelImage.SetActive(true);
+        levelImage.SetActive(true);
 
         //Call the HideLevelImage function with a delay in seconds of levelStartDelay.
-        //Invoke("HideLevelImage", levelStartDelay);
+        Invoke("HideLevelImage", levelStartDelay);
 
         //Clear any Enemy objects in our List to prepare for next level.
         enemies.Clear();
@@ -101,10 +101,10 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         //Set levelText to display number of levels passed and game over message
-        //levelText.text = "After " + level + " days, you starved.";
+        levelText.text = "After " + level + " days, you starved.";
 
         //Enable black background image gameObject.
-        //levelImage.SetActive(true);
+        levelImage.SetActive(true);
 
         //Disable this GameManager.
         enabled = false;
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //Check that playersTurn or enemiesMoving or doingSetup are not currently true.
-        if (playersTurn || enemiesMoving)
+        if (playersTurn || enemiesMoving || doingSetup)
 
             //If any of these are true, return and do not start MoveEnemies.
             return;
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
         enemiesMoving = false;
     }
 
-    /**
+    
      //Hides black image used between levels
         void HideLevelImage()
         {
@@ -179,5 +179,5 @@ public class GameManager : MonoBehaviour
             //Set doingSetup to false allowing player to move again.
             doingSetup = false;
         }
-     */
+     
 }
