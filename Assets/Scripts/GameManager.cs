@@ -1,4 +1,14 @@
 
+/*
+ Tasca Unity:
+    - Si estamos mas a la izquierda el enemigo deberia ir a la izquieda pero tiene un obstaculo
+    y se queda tonto. Debemos mirar los if que configuran todos los movimientos del enemigo
+    y decirle que cuando tenga un obstaculo busque otra opción que no sea tirar para l a izquierda, 
+    e.g. podria tirar hacia abajo/arriba
+ */
+
+
+
 
 using System;
 using System.Collections;
