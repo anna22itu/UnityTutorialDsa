@@ -16,7 +16,7 @@ using System.Collections.Generic;        //Allows us to use Lists.
 using UnityEngine;
 using Completed;
 using UnityEngine.UI;                    //Allows us to use UI.
-
+using Random = UnityEngine.Random;         //Tells Random to use the Unity Engine random number generator.
 
 
 public class GameManager : MonoBehaviour
@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
     //Awake is always called before any Start functions
     void Awake()
     {
+        // This will use the same seed for all the random numbers and you will have the same behaviour that the videos shown.
+        Random.InitState(0);
+
         //Check if instance already exists
         if (instance == null)
 
